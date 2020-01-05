@@ -7,12 +7,16 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,10 +28,15 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        ListAdapter adapter;
+        RecyclerView list = findViewById(R.id.list);
+        list.setHasFixedSize(true);
+        list.setLayoutManager(new LinearLayoutManager(this));
 
-        ListView list = findViewById(R.id.list_view);
-        list.setAdapter(adapter);
+        ArrayList<String> tasks = new ArrayList<String>();
+        tasks.add("thing");
+
+
+        list.setAdapter(new TodoAdapter(tasks));
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
