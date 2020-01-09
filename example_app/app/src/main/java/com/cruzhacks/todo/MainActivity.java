@@ -18,7 +18,10 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddTodoFragment.AddDialogListener {
+
+    private ArrayList<String> tasks;
+    TodoAdapter listAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,21 +32,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         RecyclerView list = findViewById(R.id.list);
-        list.setHasFixedSize(true);
         list.setLayoutManager(new LinearLayoutManager(this));
 
-        ArrayList<String> tasks = new ArrayList<String>();
+        tasks = new ArrayList<String>();
+        tasks.add("thing");
+        tasks.add("thing");
+        tasks.add("thing");
         tasks.add("thing");
 
-
-        list.setAdapter(new TodoAdapter(tasks));
+        listAdapter = new TodoAdapter(tasks);
+        list.setAdapter(listAdapter);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                final AddTodoFragment addFragment = new AddTodoFragment();
+                addFragment.show(getSupportFragmentManager(),"AddTodoFragment");
             }
         });
     }
@@ -68,5 +73,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onAddElement(String newTask) {
+        tasks.add(0,newTask);
+        listAdapter.notifyDataSetChanged();
     }
 }
