@@ -1,5 +1,6 @@
 package com.cruzhacks.todo;
 
+//importing libraries
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,9 +22,17 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AddTodoFragment.AddDialogListener {
 
+    //fields
     private ArrayList<String> tasks;
     TodoAdapter listAdapter;
 
+    /*
+        onCreate() is the method responsible for creating an activity
+        you can initialize code in this method
+        takes in a savedInstanceState which preserves the state of the app
+        eg: when you rotate your phone, savedInstanceState saves all the data your app currently has
+        restores information after orientation has changed 
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
