@@ -13,6 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+/*
+    This class allows us to create a popup that asks you to implement a task
+ */
+
 public class AddTodoFragment extends DialogFragment {
 
     AddDialogListener myListener;
