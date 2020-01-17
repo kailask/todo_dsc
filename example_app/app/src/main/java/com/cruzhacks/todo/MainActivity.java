@@ -1,6 +1,8 @@
 package com.cruzhacks.todo;
 
 //importing libraries
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,12 +21,16 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements AddTodoFragment.AddDialogListener {
 
     //fields
     private ArrayList<String> tasks;
     TodoAdapter listAdapter;
+
+    private final String PREF_KEY = "TASKS";
 
     /*
         onCreate() is the method responsible for creating an activity
@@ -51,6 +57,10 @@ public class MainActivity extends AppCompatActivity implements AddTodoFragment.A
 
         tasks = new ArrayList<String>();
 
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        Set<String> storedTasks = sharedPref.getStringSet(PREF_KEY,new HashSet<String>());
+        tasks.addAll(storedTasks);
+
         listAdapter = new TodoAdapter(tasks);
         list.setAdapter(listAdapter);
 
@@ -71,5 +81,14 @@ public class MainActivity extends AppCompatActivity implements AddTodoFragment.A
     public void onAddElement(String newTask) {
         tasks.add(0,newTask);
         listAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putStringSet(PREF_KEY,new HashSet<String>(tasks));
+        editor.apply();
     }
 }
