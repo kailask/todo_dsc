@@ -35,12 +35,17 @@ public class MainActivity extends AppCompatActivity implements AddTodoFragment.A
     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //pass savedInstanceState to parent
         super.onCreate(savedInstanceState);
+
+        //sets the design of the app
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
 
+        //RecyclerView containerizes the list of views
         RecyclerView list = findViewById(R.id.list);
         list.setLayoutManager(new LinearLayoutManager(this));
 
