@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 /*
     This class lets us remove a swiped task from the app
-
  */
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {

@@ -65,13 +65,15 @@ public class MainActivity extends AppCompatActivity implements AddTodoFragment.A
         Set<String> storedTasks = sharedPref.getStringSet(PREF_KEY,new HashSet<String>());
         tasks.addAll(storedTasks);
 
-        //
+        //takes in tasks and uses a RecyclerView
         listAdapter = new TodoAdapter(tasks);
         list.setAdapter(listAdapter);
 
+        //allows tasks to be swipeable
         ItemTouchHelper myHelper = new ItemTouchHelper(new SwipeToDeleteCallback(listAdapter));
         myHelper.attachToRecyclerView(list);
 
+        //add task button
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
