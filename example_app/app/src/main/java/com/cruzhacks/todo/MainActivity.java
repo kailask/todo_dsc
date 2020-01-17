@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements AddTodoFragment.A
 
         listAdapter = new TodoAdapter(tasks);
         list.setAdapter(listAdapter);
+
+        ItemTouchHelper myHelper = new ItemTouchHelper(new SwipeToDeleteCallback(listAdapter));
+        myHelper.attachToRecyclerView(list);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

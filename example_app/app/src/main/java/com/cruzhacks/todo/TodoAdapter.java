@@ -43,4 +43,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoHolder> {
             this.name = layout.findViewById(R.id.task_name);
         }
     }
+
+    public void removeItem(int position){
+        tasks.remove(position);
+        this.notifyItemRemoved(position);
+    }
 }
