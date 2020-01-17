@@ -55,12 +55,17 @@ public class MainActivity extends AppCompatActivity implements AddTodoFragment.A
         RecyclerView list = findViewById(R.id.list);
         list.setLayoutManager(new LinearLayoutManager(this));
 
+
+        //initialize tasks
         tasks = new ArrayList<String>();
 
+        //SharedPreferences points to a file containing key, value pairs
+        //adds previous tasks on app to preserve state
         SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
         Set<String> storedTasks = sharedPref.getStringSet(PREF_KEY,new HashSet<String>());
         tasks.addAll(storedTasks);
 
+        //
         listAdapter = new TodoAdapter(tasks);
         list.setAdapter(listAdapter);
 
@@ -83,6 +88,12 @@ public class MainActivity extends AppCompatActivity implements AddTodoFragment.A
         listAdapter.notifyDataSetChanged();
     }
 
+
+    /*
+        Upon saving instance, all the tasks get preserved in SharedPreferences
+        This is done by using the editor object, and writing to the editor
+        normally SharedPreferences is read-only
+     */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

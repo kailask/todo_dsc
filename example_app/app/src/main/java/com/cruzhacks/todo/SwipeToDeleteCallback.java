@@ -4,6 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+/*
+    This class lets us remove a swiped task from the app
+
+ */
+
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
     private TodoAdapter myAdapter;
 

@@ -10,6 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/*
+    This class creates tasks and converts between strings to views.
+    Each task (which is now aa View) is attached to a Holder.
+    The point of using a RecyclerView is to reuse holders that are no longer in use from
+    tasks that have been completed.
+*/
+
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoHolder> {
 
     private ArrayList<String> tasks;
